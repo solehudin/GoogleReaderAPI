@@ -72,7 +72,7 @@ module GoogleReaderApi
       #   http.request(request)
       # end
 
-      res = Typhoeus::Request.get(url.to_s, headers: {"Authorization" => "#{auth}"})
+      res = Typhoeus::Request.get(uri.to_s, headers: {"Authorization" => "#{auth}"})
 
       p '======================================='
       p res.body
