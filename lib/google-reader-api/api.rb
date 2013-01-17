@@ -66,10 +66,16 @@ module GoogleReaderApi
     def request(uri,request)
       # add the cookie to the http header
       #request.add_field('Authorization',"GoogleLogin auth=#{auth}")
-      request.add_field('Authorization',"OAuth auth=#{auth}")
-      res = Net::HTTP.start(uri.host,uri.port) do |http|
-        http.request(request)
-      end
+
+      # request.add_field('Authorization',"OAuth auth=#{auth}")
+      # res = Net::HTTP.start(uri.host,uri.port) do |http|
+      #   http.request(request)
+      # end
+
+      res = Typhoeus::Request.get(url.to_s, headers: {"Authorization" => "#{auth}"})
+
+      p '======================================='
+      p res.body
       # TODO: use better exception
       if res.code != '200'
         p res.body
