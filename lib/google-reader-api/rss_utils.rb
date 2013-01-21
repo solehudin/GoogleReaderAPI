@@ -7,7 +7,8 @@ module GoogleReaderApi
     private
 
     def create_entries(atom_feed)
-      RSS::Parser.parse(atom_feed.force_encoding('utf-8')).entries.map {|e| GoogleReaderApi::Entry.new(@api,e) }
+      #RSS::Parser.parse(atom_feed.force_encoding('utf-8')).entries.map {|e| GoogleReaderApi::Entry.new(@api,e) }
+      JSON.parse(atom_feed)["items"].map {|e| GoogleReaderApi::Entry.new(@api,e) }
     end
     
   end

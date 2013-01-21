@@ -19,8 +19,12 @@ module GoogleReaderApi
       edit_tag 'user/-/state/com.google/starred'
     end
     
+    def inspect
+      to_s
+    end
+
     def to_s
-      "<<Entry: #{@entry.title.content} >>"
+      "<<Entry: #{@entry['title']} >>"
     end
     
     private 

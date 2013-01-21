@@ -69,7 +69,8 @@ module GoogleReaderApi
     end
 
     def get_feed_items(args={})
-      @api.get_link "atom/feed/#{url}" , args
+      #@api.get_link "atom/feed/#{url}" , args
+      @api.get_link "api/0/stream/contents/feed/#{url}" , args
     end
 
   end
