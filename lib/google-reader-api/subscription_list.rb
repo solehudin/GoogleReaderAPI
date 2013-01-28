@@ -36,10 +36,10 @@ module GoogleReaderApi
     # subscribe to the given url
     # google will set the title for you
     def add(url)
-      @api.post_link 'api/0/subscription/quickadd', :s => "feed/#{url}" , :ac => :subscribe 
+      @api.post_link 'api/0/subscription/edit', :s => "feed/#{url}" , :ac => :subscribe 
       update
     end
-    
+            
     # return an array of unread items
     def unread_items
       feeds.map(&:all_unread_items)
