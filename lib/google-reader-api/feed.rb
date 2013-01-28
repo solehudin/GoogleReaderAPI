@@ -6,14 +6,14 @@ module GoogleReaderApi
 
     attr_reader :url, :title, :api, :sortid, :categories, :firstitemmsec
 
-    def initialize(hash,api)
+    def initialize(hash,api, feed_url=nil)
       # strip the first 5 characters of the url (they are 'feed/')
-      @url = hash['id'][5..-1]
-      @title = hash['title']
+      @url = feed_url.nil? ? hash['id'][5..-1] : feed_url
+      @title = hash['title'] rescue nil
       # no idea what this is used for
-      @sortid = hash['sortid']
-      @categories = hash['categories']
-      @firstitemmsec = hash['firstitemmsec']
+      @sortid = hash['sortid'] rescue nil
+      @categories = hash['categories'] rescue nil
+      @firstitemmsec = hash['firstitemmsec'] rescue nil
 
       @api = api
     end
@@ -59,13 +59,15 @@ module GoogleReaderApi
     end
 
     def to_s
-      "<<Feed: #{title} url:#{url}>>"
+      #"<<Feed: #{title} url:#{url}>>"
+      "#{title} url:#{url}"
     end
 
     private
 
     def get_user_items(state,args={})
-      @api.get_link "atom/user/-/state/com.google/#{state}" , args
+      #@api.get_link "atom/user/-/state/com.google/#{state}" , args
+      @api.get_link "api/0/stream/contents/user/-/state/com.google/#{state}" , args
     end
 
     def get_feed_items(args={})
