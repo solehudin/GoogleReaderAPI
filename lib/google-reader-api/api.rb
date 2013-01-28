@@ -66,7 +66,7 @@ module GoogleReaderApi
     def request(uri,request)
       # add the cookie to the http header
       #request.add_field('Authorization',"GoogleLogin auth=#{auth}")
-      request.add_field('Authorization',"OAuth #{auth}")
+      request.add_field('Authorization',"OAuth oauth_token=#{auth}")
       res = Net::HTTP.start(uri.host,uri.port) do |http|
         http.request(request)
       end
